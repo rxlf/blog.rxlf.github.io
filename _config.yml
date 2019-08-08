@@ -81,3 +81,8 @@ deploy:
   type: git
   repo: https://github.com/rxlf/blog.rxlf.github.io.git
   branch: master
+
+# sitemap
+sitemap:
+  path: sitemap.xml
+
