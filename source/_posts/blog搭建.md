@@ -92,7 +92,9 @@ deploy:
 
 当配置好了过后，就可以进行发布了，发布前需要安装`hexo-deployer-git`，否则会提示git仓库找不到，安装命令如下  
 `npm install hexo-deployer-git --save`
-完成安装之后，再次执行hexo g和hexo d命令。就可以发布到我们的github仓库了。查看Github Page上提示的url，访问这个链接，就能看到我们的blog啦。
+完成安装之后，再次执行`hexo g`和`hexo d`命令(分别是hexo generate 和 hexo deploy的简写)。就可以发布到我们的github仓库了。查看Github Page上提示的url，访问这个链接，就能看到我们的blog啦。  
+
+具体的命令请参考[hexo](https://hexo.io/zh-cn/docs/index.html)
 
 ### 访问自己的域名
 首先申请自己的域名，阿里云或者腾讯云上申请，我自己是在腾讯云上申请的，所以这里以腾讯云为例  
