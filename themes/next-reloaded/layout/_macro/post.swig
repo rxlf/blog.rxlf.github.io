@@ -227,9 +227,9 @@
     {#####################}
 
   <div>
-      {% if not is_index %}
-      {% include 'passage-end-tag.swig' %}
-      {% endif %}
+    {% if not is_index %}
+    {% include 'passage-end-tag.swig' %}
+    {% endif %}
   </div>
 
     {%- if theme.related_posts.enable and (theme.related_posts.display_in_home or not is_index) %}

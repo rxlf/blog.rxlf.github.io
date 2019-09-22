@@ -86,3 +86,13 @@ deploy:
 sitemap:
   path: sitemap.xml
 
+# Extensions
+## Plugins: http://hexo.io/plugins/
+plugins: hexo-generate-feed
+
+# 增加字数统计和时长统计
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
