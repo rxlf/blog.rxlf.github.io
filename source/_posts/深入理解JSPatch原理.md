@@ -40,6 +40,9 @@ JSPatch中就是通过block的方式，举个JSPatch中的例子（主要是懒�
         return [_scriptRootDir stringByAppendingPathComponent:filePath];
     };
 ```
+
+<!-- more -->
+
 然后在js中这样调用就可以了
 `resourcePath("filePath")`
 

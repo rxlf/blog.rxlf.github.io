@@ -24,16 +24,19 @@ npm install
 `myBlog`是创建文件夹的名称，可以根据自己的喜好来，建议以blog.xxxx命名，比如我的[blog.rxlf.github.io](https://github.com/rxlf/blog.rxlf.github.io)  
 执行完上面的命令后，就可以开始写我们的blog了。
 
+<!-- more -->
 
 在写Blog之前，先简单的介绍一下初始化工程后的目录结构，以便知道各模块的作用：
+```
 .
 ├── _config.yml
 ├── package.json
 ├── scaffolds
 ├── source
- |   ├── _drafts
- |   └── _posts
+|   ├── _drafts
+|   └── _posts
 └── themes
+```
 
 _config.yml 网站的配置信息，包括网站的名称语言环境，和后续发布等相关的内容。
 package.json 应用程序信息

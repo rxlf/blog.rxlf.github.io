@@ -6,9 +6,9 @@
 title: 日夕凉风的博客
 subtitle: 新的开始~~~~~
 description:
-keywords: 日夕凉风,陈识宇
-author: 陈识宇
-language: zh-CN
+keywords: 日夕凉风
+author: 日夕凉风
+language: zh-Hans
 timezone:
 
 # URL
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next-reloaded
+theme: next514
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -85,14 +85,9 @@ deploy:
 # sitemap
 sitemap:
   path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
-plugins: hexo-generate-feed
-
-# 增加字数统计和时长统计
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
+#plugins: hexo-generator-sitemap
