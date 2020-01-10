@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="arb5fhE3neQZWLD47FW8SpOx-Q1lq95Fw3ATWgdXCAY">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="日夕凉风的博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="blog已经搭建好有一段时间了，但是经历了找工作，出去玩，新入职，搬家一系列事情，加上比较懒，一直没有写文章，所以这里总结一下blog搭建过程，还有一些遇到的坑 环境搭建node.js (Should be at least nodejs 6.9)git 配置好node和git后安装Hexo执行下面命令  npm install -g hexo-cli  建站配置好环境过后，就可以开始搭建我们的b">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="blog搭建">
+<meta property="og:url" content="https://blog.rxlfchen.com/2019/09/08/blog搭建/index.html">
+<meta property="og:site_name" content="日夕凉风的博客">
+<meta property="og:description" content="blog已经搭建好有一段时间了，但是经历了找工作，出去玩，新入职，搬家一系列事情，加上比较懒，一直没有写文章，所以这里总结一下blog搭建过程，还有一些遇到的坑 环境搭建node.js (Should be at least nodejs 6.9)git 配置好node和git后安装Hexo执行下面命令  npm install -g hexo-cli  建站配置好环境过后，就可以开始搭建我们的b">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-09T05:45:26.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="blog搭建">
+<meta name="twitter:description" content="blog已经搭建好有一段时间了，但是经历了找工作，出去玩，新入职，搬家一系列事情，加上比较懒，一直没有写文章，所以这里总结一下blog搭建过程，还有一些遇到的坑 环境搭建node.js (Should be at least nodejs 6.9)git 配置好node和git后安装Hexo执行下面命令  npm install -g hexo-cli  建站配置好环境过后，就可以开始搭建我们的b">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.rxlfchen.com/2019/09/08/blog搭建/">
+
+
+
+
+
+  <title>blog搭建 | 日夕凉风的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">日夕凉风的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">原来你也在这里~~~~~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.rxlfchen.com/2019/09/08/blog搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="日夕凉风">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日夕凉风的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">blog搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-08T11:53:40+08:00">
+                2019-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>blog已经搭建好有一段时间了，但是经历了找工作，出去玩，新入职，搬家一系列事情，加上比较懒，一直没有写文章，所以这里总结一下blog搭建过程，还有一些遇到的坑</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>node.js (Should be at least nodejs 6.9)<br>git</p>
+<p>配置好node和git后安装Hexo执行下面命令</p>
+<blockquote>
+<p>npm install -g hexo-cli</p>
+</blockquote>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>配置好环境过后，就可以开始搭建我们的blog了</p>
+<blockquote>
+<p>hexo init myBlog<br>cd myBlog<br>npm install </p>
+</blockquote>
+<p><code>myBlog</code>是创建文件夹的名称，可以根据自己的喜好来，建议以blog.xxxx命名，比如我的<a href="https://github.com/rxlf/blog.rxlf.github.io" target="_blank" rel="noopener">blog.rxlf.github.io</a><br>执行完上面的命令后，就可以开始写我们的blog了。</p>
+<a id="more"></a>
+
+<p>在写Blog之前，先简单的介绍一下初始化工程后的目录结构，以便知道各模块的作用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+
+<p>_config.yml 网站的配置信息，包括网站的名称语言环境，和后续发布等相关的内容。<br>package.json 应用程序信息<br>scaffolds 模板文件，Hexo 会根据 scaffold 来建立文件。<br>source 资源文件夹是存放用户资源的地方。<br>themes 主题文件夹。Hexo 会根据主题来生成静态页面。</p>
+<h3 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h3><blockquote>
+<p>hexo new post blog搭建</p>
+</blockquote>
+<p>这样就建好了一篇“blog搭建”为title的文章，接下来就是markdown语法补充我们的内容就可以了。</p>
+<h3 id="本地生成查看效果"><a href="#本地生成查看效果" class="headerlink" title="本地生成查看效果"></a>本地生成查看效果</h3><p>在写好我们的blog过后，如何查看文章效果<br>首先生成静态文件，命令如下</p>
+<blockquote>
+<p>hexo generate</p>
+</blockquote>
+<p>查看效果</p>
+<blockquote>
+<p>hexo server</p>
+</blockquote>
+<p>该命令会在本地起一个服务，默认连接为<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> ,复制到浏览器，打开就能看到文章效果。</p>
+<h3 id="博客配置"><a href="#博客配置" class="headerlink" title="博客配置"></a>博客配置</h3><p>打开发现blog的站点名，title, subtitle 都不是我们自己的名字。这时候只需要在<code>config.yml</code>相应修改就可以了。</p>
+<h4 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h4><p>默认主题很丑。。所以如果有需求，我们可以更换主题。我自己使用的是next，其他主题可以去官网<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a> 查看。这里介绍一下next安装：<br>在终端下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd myBlog</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>config.yml</code>,找到theme修改为next就可以了，更多详细的配置参考<a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">next</a></p>
+<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>前面已经讲了如何建站以及如何生成我们的blog文章以及一些基本配置，但是现在只能通过本地访问，我们写blog的目的还是让别人能访问到我们的blog。<br>那么如何让别人能访问我们的blog，这里选择托管到github上面，具体操作如下:  </p>
+<p>首先创建github仓库，命名<code>xxx.github.io</code>, xxx为你的blog名字，比如前面的<code>myBlog</code>, 然后在仓库setting中开启Github Page<br>这里有一点需要注意，Github Page 默认分支只能是master，当我们发布时，master分支是构建好的Public文件件中的内容，没有我们的源码，所以建议创建一个sourse分支，并且修改为默认分支，这样我们可以把源文件放到sourse分支，发布内容放到master，换了电脑和环境过后依然可以通过clone代码仓库找到我们的源文件，否则源文件就丢掉了。  </p>
+<p>将仓库上传后，修改<code>config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://github.com/rxlf/blog.rxlf.github.io.git</span><br><span class="line">root: /blog.rxlf.github.io/</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
+
+<p>注意root一定要添加，否则css会加载失败。<br>并且在<code>config.yml</code>添加, repo 就是你的github仓库地址，branch为发布分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/rxlf/blog.rxlf.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>当配置好了过后，就可以进行发布了，发布前需要安装<code>hexo-deployer-git</code>，否则会提示git仓库找不到，安装命令如下<br><code>npm install hexo-deployer-git --save</code><br>完成安装之后，再次执行<code>hexo g</code>和<code>hexo d</code>命令(分别是hexo generate 和 hexo deploy的简写)。就可以发布到我们的github仓库了。查看Github Page上提示的url，访问这个链接，就能看到我们的blog啦。  </p>
+<p>具体的命令请参考<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">hexo</a></p>
+<h3 id="访问自己的域名"><a href="#访问自己的域名" class="headerlink" title="访问自己的域名"></a>访问自己的域名</h3><p>首先申请自己的域名，阿里云或者腾讯云上申请，我自己是在腾讯云上申请的，所以这里以腾讯云为例  </p>
+<p>配置解析  </p>
+<p>添加二级域名  </p>
+<p>在github page中修改域名</p>
+<p>在<code>config.yml</code>修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://blog.rxlfchen.com</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何能在google中搜到自己的blog"><a href="#如何能在google中搜到自己的blog" class="headerlink" title="如何能在google中搜到自己的blog"></a>如何能在google中搜到自己的blog</h3><p>安装sitmap站点地图生成插件<br><code>npm install hexo-generator-sitemap --save</code><br>在配置文件中增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># sitemap</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></table></figure>
+
+<p>然后重新发布我们的blog，就可以了，其他还有解析配置方式等，可以参考google search里提示的方法</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    日夕凉风
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.rxlfchen.com/2019/09/08/blog搭建/" title="blog搭建">https://blog.rxlfchen.com/2019/09/08/blog搭建/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/22/深入理解JSPatch原理/" rel="prev" title="深入理解JSPatch原理">
+                深入理解JSPatch原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="日夕凉风">
+            
+              <p class="site-author-name" itemprop="name">日夕凉风</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/rxlf" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="chenshiyu1995@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建站"><span class="nav-number">2.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始写作"><span class="nav-number">3.</span> <span class="nav-text">开始写作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地生成查看效果"><span class="nav-number">4.</span> <span class="nav-text">本地生成查看效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客配置"><span class="nav-number">5.</span> <span class="nav-text">博客配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#themes"><span class="nav-number">5.1.</span> <span class="nav-text">themes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到github"><span class="nav-number">6.</span> <span class="nav-text">部署到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问自己的域名"><span class="nav-number">7.</span> <span class="nav-text">访问自己的域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何能在google中搜到自己的blog"><span class="nav-number">8.</span> <span class="nav-text">如何能在google中搜到自己的blog</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">日夕凉风</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
