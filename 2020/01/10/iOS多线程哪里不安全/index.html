@@ -92,7 +92,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/memoryLaout.png">
 <meta property="og:image" content="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/lock_performance.jpeg">
-<meta property="og:updated_time" content="2020-01-10T05:23:14.160Z">
+<meta property="og:updated_time" content="2020-01-10T05:27:46.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS多线程哪里不安全">
 <meta name="twitter:description" content="数据在内存中的访问在内存访问中，所有对内存的访问都是通过地址总线找到地址，数组总线返回数据。我们只有一个地址总线以及数据总线，所以对内存的访问，无论如何都是串行的。所以能得出两个结论  内存访问是串行的，并不会导致内存数据的错乱或者crash 如果读写的内存长度小于数据总线的长度，那么读写操作一次完成。比如 bool, int, long 在64位操作系统中的读写都可以看成是原子操作（64位操作系">
@@ -334,6 +334,8 @@
 <h2 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h2><p>在 OC 或者 Swift 里面，以及其他语言也是类似的，要区分两个概念，值类型和引用类型。<br>值类型是指直接访问内存中的数据，引用类型是指通过指针，间接的访问内存中的数据。  </p>
 <p>通过一个例子来简单区分，有这么两个属性: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) int a;</span><br><span class="line">@property (nonatomic, strong) NSString *str</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>对引用（指针）进行修改:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 赋值后，str 会指向另外一个内存地址</span><br><span class="line">self.str = @&quot;日夕凉风&quot;;</span><br></pre></td></tr></table></figure>

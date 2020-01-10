@@ -323,8 +323,7 @@
 
       
         
-          
-            <h2 id="数据在内存中的访问"><a href="#数据在内存中的访问" class="headerlink" title="数据在内存中的访问"></a>数据在内存中的访问</h2><p>在内存访问中，所有对内存的访问都是通过地址总线找到地址，数组总线返回数据。我们只有一个地址总线以及数据总线，所以对内存的访问，无论如何都是串行的。<br>所以能得出两个结论</p>
+          <h2 id="数据在内存中的访问"><a href="#数据在内存中的访问" class="headerlink" title="数据在内存中的访问"></a>数据在内存中的访问</h2><p>在内存访问中，所有对内存的访问都是通过地址总线找到地址，数组总线返回数据。我们只有一个地址总线以及数据总线，所以对内存的访问，无论如何都是串行的。<br>所以能得出两个结论</p>
 <ol>
 <li>内存访问是串行的，并不会导致内存数据的错乱或者crash</li>
 <li>如果读写的内存长度小于数据总线的长度，那么读写操作一次完成。比如 bool, int, long 在64位操作系统中的读写都可以看成是原子操作（64位操作系统一次性支持8字节数据的读取）。</li>
@@ -332,43 +331,13 @@
 <h2 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h2><p>在 OC 或者 Swift 里面，以及其他语言也是类似的，要区分两个概念，值类型和引用类型。<br>值类型是指直接访问内存中的数据，引用类型是指通过指针，间接的访问内存中的数据。  </p>
 <p>通过一个例子来简单区分，有这么两个属性: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) int a;</span><br><span class="line">@property (nonatomic, strong) NSString *str</span><br></pre></td></tr></table></figure>
-
-<p>对引用（指针）进行修改:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 赋值后，str 会指向另外一个内存地址</span><br><span class="line">self.str = @&quot;日夕凉风&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>对指进行修改:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.a = 100;</span><br></pre></td></tr></table></figure>
-
-<p>对指针指向的内存区域访问:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.str rangeOfString:@&quot;风&quot;];</span><br></pre></td></tr></table></figure>
-
-<p>两种类型的内存布局大概如下:<br><img src="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/memoryLaout.png" alt="1"></p>
-<h3 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@property (atomic, assign) int a;</span><br><span class="line"></span><br><span class="line">// ThreadA</span><br><span class="line">for (int i = 0; i &lt; 10000; i ++) &#123;</span><br><span class="line">    self.a = self.a + 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Thread B</span><br><span class="line">for (int i = 0; i &lt; 10000; i ++) &#123;</span><br><span class="line">    self.a = self.a + 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后的结果一定是 20000 吗，答案是不一定的，这就是我们常说的 <code>atomic</code> 不能保证线程安全的。原因是因为虽然对 <code>a</code> 的 <code>set</code> 和 <code>get</code> 方法进行了原子操作，但是，对于 <code>self.a = self.a + 1;</code> 这个语句实际上包含了三步。</p>
-<ol>
-<li>取出 <code>self.a</code></li>
-<li>执行 <code>self.a + 1</code></li>
-<li>将结果赋值给 <code>self.a</code></li>
-</ol>
-<p>所以当前线程执行 <code>self.a + 1</code> 操作时，其他的线程可能已经执行了若干次了，返回的赋值结果可能会覆盖其他线程的结果，导致结果偏小。  </p>
-<p>对于 int 来讲， 64位系统占 4 字节，数据总线一次可以读写 8 个字节，所以对于 int 本身，加不加 <code>atomic</code> 都是一样的</p>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@property (atomic, strong) NSString*   stringA;</span><br><span class="line">// Thread A</span><br><span class="line">for (int i = 0; i &lt; 100000; i ++) &#123;</span><br><span class="line">    if (i % 2 == 0) &#123;</span><br><span class="line">        self.stringA = @&quot;a very long string&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        self.stringA = @&quot;string&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@&quot;Thread A: %@\n&quot;, self.stringA);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Thread B</span><br><span class="line">for (int i = 0; i &lt; 100000; i ++) &#123;</span><br><span class="line">    if (self.stringA.length &gt;= 10) &#123;</span><br><span class="line">        NSString* subStr = [self.stringA substringWithRange:NSMakeRange(0, 10)];</span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@&quot;Thread B: %@\n&quot;, self.stringA);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>虽然 <code>stringA</code> 是 <code>atomic</code> 的 property ，而且在取substring的时候做了length判断，线程B还是很容易crash，因为在前一刻读length的时候 <code>self.stringA = @&quot;a very long string&quot;;</code>，下一刻取substring的时候线程A已经将<code>self.stringA = @&quot;string&quot;;</code>，立即出现out of bounds的Exception，crash，多线程不安全。</p>
-<h2 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h2><h3 id="atomic-作用"><a href="#atomic-作用" class="headerlink" title="atomic 作用"></a>atomic 作用</h3><ol>
-<li><strong>生成原子操作的getter和setter。</strong><br>设置atomic之后，默认生成的getter和setter方法执行是原子的。也就是说，当我们在线程1执行getter方法的时候（创建调用栈，返回地址，出栈），线程B如果想执行setter方法，必须先等getter方法完成才能执行。举个例子，在32位系统里，如果通过getter返回64位的double，地址总线宽度为32位，从内存当中读取double的时候无法通过原子操作完成，如果不通过atomic加锁，有可能会在读取的中途在其他线程发生setter操作，从而出现异常值。如果出现这种异常值，就发生了多线程不安全。</li>
-<li><strong>设置Memory Barrier</strong><br>因为存在编译器优化，所以编译器可能在一些场景下先执行line2，再执行line1，因为它认为line1和line2之间并不存在依赖关系，虽然在代码执行的时候，在另一个线程intA和intB存在某种依赖，必须要求line1先于line2执行。<br>memory barrier能够保证内存操作的顺序，按照我们代码的书写顺序来。</li>
-</ol>
-<h3 id="atomic-局限"><a href="#atomic-局限" class="headerlink" title="atomic 局限"></a>atomic 局限</h3><p>通过前面的例子，atomic的作用只是给getter和setter加了个锁，atomic只能保证代码进入getter或者setter函数内部时是安全的，一旦出了getter和setter，多线程安全只能靠程序员自己保障了。所以atomic属性和使用property的多线程安全并没什么直接的联系。另外，atomic由于加锁也会带来一些性能损耗，所以我们在编写iOS代码的时候，一般声明property为nonatomic，在需要做多线程安全的场景，自己去额外加锁做同步。</p>
-<h2 id="如何做到多线程安全"><a href="#如何做到多线程安全" class="headerlink" title="如何做到多线程安全"></a>如何做到多线程安全</h2><p>做到多线程安全，关键还是 <code>atomic</code>， 只要做到原子性，小到对变量的访问，大到一段代码的执行，原子性都能保证在代码的执行过程中不被打断，能保证一个线程执行到一半时，不会被另外一个线程抢占。</p>
-<h3 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h3><p>加锁，举个例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Thread A</span><br><span class="line">[_lock lock];</span><br><span class="line">for (int i = 0; i &lt; 100000; i ++) &#123;</span><br><span class="line">    if (i % 2 == 0) &#123;</span><br><span class="line">        self.arr = @[@&quot;1&quot;, @&quot;2&quot;, @&quot;3&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        self.arr = @[@&quot;1&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    NSLog(@&quot;Thread A: %@\n&quot;, self.arr);</span><br><span class="line">&#125;</span><br><span class="line">[_lock unlock];</span><br><span class="line">    </span><br><span class="line">// Thread B</span><br><span class="line">[_lock lock];</span><br><span class="line">if (self.arr.count &gt;= 2) &#123;</span><br><span class="line">    NSString* str = [self.arr objectAtIndex:1];</span><br><span class="line">&#125;</span><br><span class="line">[_lock unlock];</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何选择哪种锁"><a href="#如何选择哪种锁" class="headerlink" title="如何选择哪种锁"></a>如何选择哪种锁</h3><p>借用一张图<br><img src="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/lock_performance.jpeg" alt="2"></p>
-<p>可以看到，从上到下依次是性能从高到低，但是, 由于 OSSpinLock 已经不再安全。所以不在使用。<br>这些常用的锁，如何选择，这个就看个人喜好，什么用着顺手吧，从横坐标看，都是 us 级别的，所以对于应用层来说，代码的逻辑性更重要。我个人比较喜欢使用 NSLock ，因为简单。。。 </p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/10/iOS多线程哪里不安全/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
