@@ -92,7 +92,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/memoryLaout.png">
 <meta property="og:image" content="https://rxlf-1259783270.cos.ap-chengdu.myqcloud.com/blogImg/lock_performance.jpeg">
-<meta property="og:updated_time" content="2020-01-10T05:30:34.269Z">
+<meta property="og:updated_time" content="2020-01-16T14:26:15.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS多线程哪里不安全">
 <meta name="twitter:description" content="数据在内存中的访问在内存访问中，所有对内存的访问都是通过地址总线找到地址，数组总线返回数据。我们只有一个地址总线以及数据总线，所以对内存的访问，无论如何都是串行的。所以能得出两个结论  内存访问是串行的，并不会导致内存数据的错乱或者crash 如果读写的内存长度小于数据总线的长度，那么读写操作一次完成。比如 bool, int, long 在64位操作系统中的读写都可以看成是原子操作（64位操作系">
